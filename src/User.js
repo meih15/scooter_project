@@ -11,7 +11,7 @@ class User {
         if (password === this.password) {
             this.loggedIn = true;
         } else {
-            throw new Error("incorrect password")
+            throw new Error("Incorrect password")
         }
     }
 
