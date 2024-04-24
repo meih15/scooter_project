@@ -13,6 +13,7 @@ class ScooterApp {
         this.registeredUsers = {};
     }
 
+
     registerUser(username, password, age) {
         if (this.registeredUsers[username]) {
             throw new Error('User has already been registered');
@@ -28,6 +29,7 @@ class ScooterApp {
         return user;
 
     }
+
 
     loginUser(username, password) {
 
@@ -68,6 +70,19 @@ class ScooterApp {
         return scooter;
     }
 
+
+    dockScooter(scooter, station) {
+        if (!this.stations[station]) throw new Error("No such station");
+        if (scooter.station === station) throw new Error("Scooter already at station");
+
+        scooter.dock(station);
+        this.stations[station].push(scooter);
+
+        console.log("Scooter is docked");
+        
+    }
+
+    
 };
 
 module.exports = ScooterApp
