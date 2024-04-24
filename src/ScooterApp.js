@@ -119,7 +119,13 @@ class ScooterApp {
 
     
     print() {
+        console.log("Registered Users:");
+        console.log(this.registeredUsers);
         
+        console.log("Stations:");
+        for (const station of Object.keys(this.stations)) {
+            console.log(`${station}: ${this.stations[station].length} scooters`);
+        }
     }
 
 };
