@@ -13,8 +13,8 @@ class ScooterApp {
         this.registeredUsers = {};
     }
 
-    registeredUser(username, password, age) {
-        if (this.registeredUser[username]) {
+    registerUser(username, password, age) {
+        if (this.registeredUsers[username]) {
             throw new Error('User has already been registered');
         } 
         
@@ -23,13 +23,34 @@ class ScooterApp {
         }
 
         const user = new User(username, password, age);
-        this.registeredUser[username] = user;
+        this.registeredUsers[username] = user;
         console.log(`User '${username}' has been registered.`);
         return user;
 
     }
 
-    
+    loginUser(username, password) {
+
+        if (!this.registeredUsers[username]){
+            throw new Error('Username is incorrect')
+        }
+
+        const user = this.registeredUsers[username]
+
+        if(user.password !== password) {
+            throw new Error('Password is incorrect')
+        }
+
+        user.login(password);
+        console.log("User has been logged in")
+
+    }
+
+
+    logoutUser(username) {
+        
+    }
+
 };
 
 module.exports = ScooterApp
