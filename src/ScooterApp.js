@@ -82,7 +82,46 @@ class ScooterApp {
         
     }
 
+
+    rentScooter(scooter, user) {
+
+        if (scooter.user) throw new Error("Scooter is already rented");
+
+        const station = this.findScooterStation(scooter);
+
+        if (!station) {
+            throw new Error("Scooter is not at any station.");
+        }
+
+        const index = this.stations[station].indexOf(scooter);
+
+        if (index === -1) {
+            throw new Error("Scooter is not at any station.");
+        }
+
+        this.stations[station].splice(index, 1);
+
+        scooter.rent(user);
+        console.log("Scooter is rented")
+    }
+
+    findScooterStation(scooter) {
+
+        for (const station of Object.keys(this.stations)) {
+
+            if (this.stations[station].includes(scooter)) {
+                return station;
+            }
+        }
+
+        return null;
+    }
+
     
+    print() {
+        
+    }
+
 };
 
 module.exports = ScooterApp
