@@ -1,4 +1,4 @@
-// const Scooter = require('./Scooter');
+const Scooter = require('./Scooter');
 const User = require('./User');
 
 class ScooterApp {
@@ -42,18 +42,30 @@ class ScooterApp {
         }
 
         user.login(password);
-        console.log("User has been logged in")
+        console.log(`User ${username} has been logged in`)
 
     }
 
 
     logoutUser(username) {
-        if (!this.registeredUsers[username]) {
-            throw new Error('No such user is logged in')
+        const user = this.registeredUsers[username];
+
+        if (!user) {
+            throw new Error("No such user is logged in.");
         }
 
-        this.registeredUsers[username].logout()
-        console.log("User is logged out")
+        user.logout();
+        console.log(`User '${username}' is logged out.`);
+    }
+
+    
+    createScooter(station) {
+        if (!this.stations[station]) throw new Error('No such station');
+
+        const scooter = new Scooter(station)
+        this.stations[station].push(scooter)
+        console.log("Created new scooter")
+        return scooter;
     }
 
 };
